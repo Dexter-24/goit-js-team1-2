@@ -1,4 +1,4 @@
-import { createContactService, getContactService, logOutService } from './api';
+import { createContactService, deleteContactService, getContactService, logOutService } from './api';
 import { markupContact } from './markup';
 import { btnLogOut, contactForm, contactList, logBtn, STORAGE_KEY } from './refs';
 
@@ -7,7 +7,17 @@ if (token === null) {
   location.replace('/');
 }
 contactForm.addEventListener('submit', createContact);
-btnLogOut.addEventListener('click', logOut)
+btnLogOut.addEventListener('click', logOut);
+contactList.addEventListener("click", deleteContact);
+
+function deleteContact(event) {
+  console.log(event.target.nodeName);
+  if (event.target.nodeName !== "BUTTON") {
+    return;
+  }
+  
+  deleteContactService(event.target.parentNode.id).then(() => event.target.parentNode.remove());
+}
 
 function createContact(evt) {
   evt.preventDefault();
@@ -33,3 +43,4 @@ function logOut() {
     location.replace("/")
   })
 }
+
