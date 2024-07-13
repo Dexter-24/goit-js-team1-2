@@ -13,3 +13,8 @@ export async function loginUserService(user) {
   const { data } = await axios.post('/users/login', user);
   return data;
 }
+
+export async function createContactService(contact) {
+  const { data } = await axios.post('/contacts', contact);
+  return data;
+}

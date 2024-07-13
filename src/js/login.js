@@ -17,5 +17,9 @@ function loginUser(evt) {
   loginUserService({
     email: email.value,
     password: password.value,
-  }).then(data => localStorage.setItem(STORAGE_KEY, data.token));
+  }).then(data => {
+    localStorage.setItem(STORAGE_KEY, data.token);
+    location.replace('/contacts.html');
+    instanceLogin.close();
+  });
 }
