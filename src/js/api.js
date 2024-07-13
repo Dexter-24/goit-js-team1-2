@@ -18,3 +18,15 @@ export async function createContactService(contact) {
   const { data } = await axios.post('/contacts', contact);
   return data;
 }
+
+export async function getContactService() {
+  const { data } = await axios('/contacts');
+  return data;
+}
+
+export async function logOutService() {
+  const { data } = await axios.post('/users/logout');
+  return data;
+  
+}
+

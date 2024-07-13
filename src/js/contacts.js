@@ -1,12 +1,13 @@
-import { createContactService } from './api';
+import { createContactService, getContactService, logOutService } from './api';
 import { markupContact } from './markup';
-import { contactForm, contactList, STORAGE_KEY } from './refs';
+import { btnLogOut, contactForm, contactList, logBtn, STORAGE_KEY } from './refs';
 
 const token = localStorage.getItem(STORAGE_KEY);
 if (token === null) {
   location.replace('/');
 }
 contactForm.addEventListener('submit', createContact);
+btnLogOut.addEventListener('click', logOut)
 
 function createContact(evt) {
   evt.preventDefault();
@@ -18,4 +19,17 @@ function createContact(evt) {
     contactList.insertAdjacentHTML('beforeend', markupContact(data));
     contactForm.reset();
   });
+}
+
+function reloadPage() {
+  getContactService().then((data) => contactList.insertAdjacentHTML('beforeend', data.map(markupContact).join('')))
+}
+
+reloadPage();
+
+function logOut() {
+  logOutService().then(() => {
+    localStorage.removeItem(STORAGE_KEY); 
+    location.replace("/")
+  })
 }
