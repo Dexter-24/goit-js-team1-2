@@ -35,3 +35,4 @@ export async function deleteContactService(id) {
   return data;
 }
 
+console.log("hi");
