@@ -30,3 +30,9 @@ export async function logOutService() {
   
 }
 
+export async function deleteContactService(id) {
+  const { data } = await axios.delete(`/contacts/${id}`);
+  return data;
+}
+
+console.log("hi");
